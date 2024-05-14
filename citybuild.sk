@@ -1,0 +1,251 @@
+##### CONSOLE #####
+
+on enable:
+  send "CityBuildSystem [SKRIPT] aktiviert" to console
+
+##### MAIN #####
+
+options:
+  prefix: &9CityBuild &8»
+  spawnCommandCooldown: 5 seconds
+  setSpawnCommandPermission: setspawn.citybuild
+  delSpawnCommandPermission: delspawn.citybuild
+  vanish: vanish.citybuild
+  fly: fly.citybuild
+  farmwelt: farmwelt.citybuild
+  day: day.citybuild
+  clearchat: clearchat.citybuild
+  night: night.citybuild
+
+  noPermissionMessage: &cDu hast dafür keine Rechte!
+
+##### Autobroadcast  #####
+
+##### SPAWN #####
+
+command /spawn:
+  cooldown: {@spawnCommandCooldown}
+  description: Teleportiert dich zum Spawn
+  usage: /spawn
+  trigger:
+    if {spawn} is set:
+      teleport player to {spawn}
+      send "{@prefix} &aDu wurdest zum Spawn teleportiert!" to player
+    else:
+      send "{@prefix} &cSpawn ist noch nicht gesetzt!"
+
+command /delspawn:
+  permission: {@delSpawnCommandPermission}
+  permission message: {@noPermissionMessage}
+  trigger:
+    delete {spawn}
+    send "{@prefix} &cSpawn Location wurde &ngelöscht"
+
+command /setspawn:
+  permission: {@setSpawnCommandPermission}
+  permission message: {@noPermissionMessage}
+  description: Setze den Spawnpoint.
+  usage: /setspawn
+  trigger:
+    set {spawn} to location of player
+    send "{@prefix} &aLocation for &eSpawn&a has been set to your current location." to player
+
+on join:
+  teleport player to {spawn}
+
+##### Farmwelt #####
+
+##### Day #####
+
+command /day: 
+  permission: {@day}
+  permission message: {@noPermissionMessage}
+  trigger:
+    set time to 08:00
+    send "{@prefix} &bDie Zeit wurde auf 08:00 Uhr gestellt!"
+
+##### NIGHT #####
+
+command /night:
+  permission: {@night}
+  permission message: {@noPermissionMessage}
+  trigger:
+    set time to 23:00
+    send "{@prefix} &bDie Zeit wurde auf 23:00 Uhr gestellt!"
+
+##### PLOT #####
+
+command /rand:
+  trigger:
+    open chest inventory with 3 rows named "Wähle dein Rand aus!" to player
+    wait 1 tick
+    set slot 0 of player's current inventory to oak slab named "&7Eichenholzstufe"
+    set slot 1 of player's current inventory to birch slab named "&7Birkenholzstufe"
+    set slot 2 of player's current inventory to spruce slab named "&7Schwarzeichenholzstufe"
+    set slot 3 of player's current inventory to stone slab named "&7Steinstufe"
+    set slot 4 of player's current inventory to emerald block named "&7Smaragdblock"
+    set slot 5 of player's current inventory to lapis block named "&7Lapisblock"
+    set slot 6 of player's current inventory to diamond block named "&7Diamandblock"
+    set slot 7 of player's current inventory to oxidized copper named "&7Oxidizedcopper"
+    set slot 8 of player's current inventory to copper block named "&7Kupferblock"
+    set slot 9 of player's current inventory to sculk sensor named "&7Sculk Sensor"
+    set slot 10 of player's current inventory to ancient debris named "&7Antiker Schrott"
+    set slot 11 of player's current inventory to beacon named "&7Leuchtfeuer"
+    set slot 12 of player's current inventory to netherite block named "&7Netherite Block"
+    set slot 13 of player's current inventory to bedrock named "&7Grundstein"
+    set slot 13 of player's current inventory to white stained glass named "&7Luft"
+    set slot 26 of player's current inventory to barrier named "&4Schließen"
+
+on inventory click:
+  if name of event-inventory is "Wähle dein Rand aus!":
+    cancel event
+
+    if clicked slot is 0:
+      send "{@prefix} &7Du hast dein Rand in &eEichenholzstufe &7verändert!"
+      execute player command "/p set border oak_slab"
+      close player's inventory
+
+    if clicked slot is 1:
+      send "{@prefix} &7Du hast dein Rand in &eBirkenholzstufe &7verändert!"
+      execute player command "/p set border birch_slab"
+      close player's inventory
+
+    if clicked slot is 2:
+      send "{@prefix} &7Du hast dein Rand in &eSchwarzeichenholzstufe &7verändert!"
+      execute player command "/p set border spruce_slab"
+      close player's inventory
+
+    if clicked slot is 3:
+      send "{@prefix} &7Du hast dein Rand in &eSteinstufe &7verändert!"
+      execute player command "/p set border stone_slab"
+      close player's inventory
+
+    if clicked slot is 4:
+      send "{@prefix} &7Du hast dein Rand in &eSmaragdblock &7verändert!"
+      execute player command "/p set border emerald_block"
+      close player's inventory
+
+    if clicked slot is 5:
+      send "{@prefix} &7Du hast dein Rand in &elapisblock &7verändert!"
+      execute player command "/p set border lapis_block"
+      close player's inventory
+
+    if clicked slot is 6:
+      send "{@prefix} &7Du hast dein Rand in &eDiamandblock &7verändert!"
+      execute player command "/p set border diamond_block"
+      close player's inventory
+
+    if clicked slot is 7:
+      send "{@prefix} &7Du hast dein Rand in &eOxidized copper &7verändert!"
+      execute player command "/p set border oxidized_copper"
+      close player's inventory
+
+    if clicked slot is 8:
+      send "{@prefix} &7Du hast dein Rand in &eKupferblock &7verändert!"
+      execute player command "/p set border copper_block"
+      close player's inventory
+
+    if clicked slot is 9:
+      send "{@prefix} &7Du hast dein Rand in &eSculk Kreischer &7verändert!"
+      execute player command "/p set border sculk_shrieker"
+      close player's inventory
+
+    if clicked slot is 10:
+      send "{@prefix} &7Du hast dein Rand in &eKupferblock &7verändert!"
+      execute player command "/p set border ancient_debris"
+      close player's inventory
+
+    if clicked slot is 11:
+      send "{@prefix} &7Du hast dein Rand in &eLeuchtfeuer &7verändert!"
+      execute player command "/p set border beacon"
+      close player's inventory
+
+    if clicked slot is 12:
+      send "{@prefix} &7Du hast dein Rand in &eNetherite Block &7verändert!"
+      execute player command "/p set border netherite_block"
+      close player's inventory
+
+    if clicked slot is 13:
+      send "{@prefix} &7Du hast dein Rand in &eGrundstein &7verändert!"
+      execute player command "/p set border bedrock"
+      close player's inventory
+
+    if clicked slot is 13:
+      send "{@prefix} &7Du hast &ekein &7Rand mehr!"
+      execute player command "/p set border air"
+      close player's inventory
+
+    if clicked slot is 26:
+      close player's inventory
+
+##### WALLS #####
+
+##### VANISH #####
+
+command /vanish [<player>]:
+    permission: {@vanish}
+    permission message: {@noPermissionMessage}
+    aliases: v
+    trigger:
+        if {vanish.%player%} is not set:
+            set {vanish.%player%} to true
+            send "{@prefix} &aDu bist im Vanish"
+            hide player from all players
+            stop
+        else:
+            delete {vanish.%player%}
+            send "{@prefix} &cDu bist jetzt nicht mehr im Vanish"
+            reveal player from all players
+            stop
+
+
+
+on join:
+  loop all players:
+    if {vanish.%loop-player%} is set:
+      hide loop-player from all players
+
+
+on join:
+  if {vanish.%player%} is set:
+    hide player from all players
+
+##### FLY #####
+
+command /fly:
+  permission: {@fly}
+  permission message: {@noPermissionMessage}
+  trigger:
+    if {fly.%player%} is not set:
+      send "{@prefix} &aDu kannst jetzt fliegen!"
+      set player's flight mode to true
+      set {fly.%player%} to true
+      stop
+    else:
+      send "{@prefix} &cDu kannst jetzt nicht mehr fliegen!"
+      set player's flight mode to false
+      delete {fly.%player%}
+      stop
+
+on join:
+  send "{@prefix} &cDu kannst jetzt nicht mehr fliegen!"
+  set player's flight mode to false
+  delete {fly.%player%}
+
+##### ClearChat #####
+
+command /clearchat:
+  aliases: /clearc, /cchat
+  permission: {@clearchat}
+  permission message: {@noPermissionMessage}
+  trigger:
+    loop all players:
+      loop 1000 times:
+        send " " to loop-player
+      broadcast "&bChat wurde gecleart!"
+    
+      if loop-player have the permission "clearchat.citybuild":
+        stop
+
+
+##### WERBUNG #####
