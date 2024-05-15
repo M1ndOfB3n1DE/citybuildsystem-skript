@@ -4,6 +4,7 @@
 
 Dieses Plugin befindet sich noch im "AUFBAU". 
 Feedback gerne über Discord schreiben (mindofbeni) 
+
 ## Infos 
 
 #### Alle Befehle!
@@ -31,6 +32,12 @@ Feedback gerne über Discord schreiben (mindofbeni)
 |/werbung|
 |/farmwelt,/nether,/end|
 |/enderchest|
+
+## Rand - Blöcke
+
+![App Screenshot](https://tehrion.de/wp-content/uploads/2024/05/Screenshot-2024-05-15-100634.png)
+
+![App Screenshot](https://tehrion.de/wp-content/uploads/2024/05/Screenshot-2024-05-15-100708.png)
 
 ## Plugins | **NOTWENIG**
 
